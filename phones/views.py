@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from .models import Phone
 
-# Create your views here.
+
+def catalog(request):
+    sort = request.GET.get("sort")
+    phones = Phone.objects.all()
+    if sort == "name":
+        phones = phones.order_by("name")
+    elif sort == "min_price":
+        phones = phones.order_by("price")
+    elif sort == "max_price":
+        phones = phones.order_by("-price")
+    return render(request, "catalog.html", {"phones": phones})
+
+
+def product_detail(request, slug):
+    phone = get_object_or_404(Phone, slug=slug)
+    return render(request, "product.html", {"phone": phone})
