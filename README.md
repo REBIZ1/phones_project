@@ -54,7 +54,7 @@ python manage.py migrate
 
 - Команда для загрузки данных из .csv:
 ```bash
-python manage.py load_phones
+python manage.py import_phones
 ```
 
 - Команда для запуска приложения
